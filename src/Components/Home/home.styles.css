@@ -1,3 +1,13 @@
+.cover{
+    display: block;
+    height: calc(100vh - 80px);
+    padding: 12%;
+    box-sizing: border-box;
+    background-image: url('../../assets/images/coverImage2.avif');
+    background-size: cover;
+    background-position: center;
+}
+
 .container{
     display: grid;
     gap: 50px;
