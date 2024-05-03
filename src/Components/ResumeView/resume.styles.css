@@ -1,0 +1,17 @@
+.cover-resume{
+    display: block;
+    height: calc(100vh - 80px);
+    padding: 2%;
+    box-sizing: border-box;
+    background: none;
+}
+
+.container-resume{
+    display: grid;
+    gap: 20px;
+}
+
+.css-bhp9pd-MuiPaper-root-MuiCard-root{
+    border: solid 2px greenyellow;
+}
+

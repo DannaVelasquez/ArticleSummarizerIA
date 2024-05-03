@@ -4,6 +4,14 @@ import TextField from "@mui/material/TextField";
 import "./home.styles.css";
 
 function Home() {
+
+  const handleResumeNowClick = () => {
+    const nextSection = document.getElementById('resume');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="cover">
       <div className="container">
@@ -17,7 +25,7 @@ function Home() {
           variant="outlined"
           style={{fontWeight:'bold', color:'blue'}}
         />
-        <Button variant="contained">RESUME NOW</Button>
+        <Button variant="contained" onClick={handleResumeNowClick}>RESUME NOW</Button>
       </div>
     </div>
   );
