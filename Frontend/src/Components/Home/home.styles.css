@@ -1,37 +1,39 @@
-.cover{
-    display: block;
-    height: calc(100vh - 80px);
-    padding: 12%;
-    box-sizing: border-box;
-    background-image: url('../../assets/images/coverImage2.avif');
-    background-size: cover;
-    background-position: center;
+.cover {
+  display: block;
+  height: calc(100vh - 80px);
+  padding: 12%;
+  box-sizing: border-box;
+  background-image: url("../../assets/images/coverImage2.avif");
+  background-size: cover;
+  background-position: center;
 }
 
-.container{
-    display: grid;
-    gap: 50px;
+.container {
+  display: grid;
+  gap: 50px;
 }
 
-.css-1u3bzj6-MuiFormControl-root-MuiTextField-root{
-    width: 100%;
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 100%;
 }
 
 .css-sghohy-MuiButtonBase-root-MuiButton-root {
-    width: 250px;
-    justify-self: center;
-    background-color: yellowgreen !important;
-    border-color: green !important;
+  width: 250px;
+  justify-self: center;
+  background-color: yellowgreen !important;
+  border-color: green !important;
 }
 
-.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
-    color:green !important;
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  color: green !important;
 }
 
-.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
-    border-color: green !important;
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: green !important;
 }
 
-button:focus, button:focus-visible{   
-    outline: none !important;
+button:focus,
+button:focus-visible {
+  outline: none !important;
 }

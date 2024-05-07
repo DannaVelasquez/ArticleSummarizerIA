@@ -2,10 +2,9 @@ import axios from 'axios';
 import './chatbot.styles.css'
 import { useState } from 'react';
 
-function ChatBot() {
+function ChatBot({ articleUrl }: { articleUrl: string }) {
 
   const [userInput, setUserInput] = useState('');
-  
   const [chatHistory, setChatHistory] = useState<string[]>([]);
 
   const sendMessage = async () => {
@@ -13,7 +12,7 @@ function ChatBot() {
 
     // Enviamos el mensaje del usuario al servidor
     try {
-      const response = await axios.post('http://localhost:3000/api/chat', { message: userInput});
+      const response = await axios.post('http://localhost:3000/api/chat', { message: userInput, articleUrl: articleUrl});
       const chatResponse = response.data.message;
       setChatHistory([...chatHistory, userInput, chatResponse]);
       setUserInput('');
@@ -21,7 +20,6 @@ function ChatBot() {
       console.error('Error al enviar mensaje al servidor:', error);
     }
   };
-
 
   return (
     <div>

@@ -8,9 +8,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 interface HomeProps {
   onSummaryChange: (summary: string) => void;
+  onUrlChange: (summary: string) => void;
 }
 
-function Home({ onSummaryChange }: HomeProps) {
+function Home({ onSummaryChange, onUrlChange }: HomeProps) {
  
   const [articleUrl, setArticleUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -39,6 +40,7 @@ function Home({ onSummaryChange }: HomeProps) {
       if (nextSection) {
         nextSection.scrollIntoView({ behavior: "smooth" });
       }
+      onUrlChange(articleUrl);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error("Error:", error.message);
