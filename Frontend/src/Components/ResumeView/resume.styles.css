@@ -1,6 +1,7 @@
 .cover-resume{
-    display: block;
+    display: inline-block;
     height: calc(100vh - 80px);
+    width: 80%;
     padding: 2%;
     box-sizing: border-box;
     background: none;

@@ -16,7 +16,7 @@ function ResumeView({ summary }: ResumeViewProps) {
       </h1>
       <Card>
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" style={{textAlign: 'justify'}}>
         {summary}
         </Typography>
       </CardContent>
