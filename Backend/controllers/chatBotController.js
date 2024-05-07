@@ -1,5 +1,5 @@
 const { OpenAI } = require('openai');
-const openai = new OpenAI({ apiKey: "sk-proj-ojv174WTwbN1BLpTltfyT3BlbkFJOUD2MphTra49EI75lByo" });
+const openai = new OpenAI({  });
 
 // Generate chatBot function
 async function chatBot(message, articleUrl, res) {
