@@ -1,8 +1,8 @@
+import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import TextField from "@mui/material/TextField";
 import "./home.styles.css";
-import { useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -12,11 +12,18 @@ interface HomeProps {
 }
 
 function Home({ onSummaryChange, onUrlChange }: HomeProps) {
- 
   const [articleUrl, setArticleUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [urls, setUrls] = useState<{ id: number; url: string }[]>(() => {
+    const storedUrls = localStorage.getItem("urls");
+    return storedUrls ? JSON.parse(storedUrls) : [];
+  });
 
-  //API consume
+  //Save articles url searched in local storage
+  useEffect(() => {
+    localStorage.setItem("urls", JSON.stringify(urls));
+  }, [urls]);
+
   const handleResumeNowClick = async () => {
     setLoading(true);
     try {
@@ -35,20 +42,18 @@ function Home({ onSummaryChange, onUrlChange }: HomeProps) {
       const data = await response.json();
       onSummaryChange(data.summary);
 
+      setUrls([...urls, { id: urls.length + 1, url: articleUrl }]);
+
       //After search, scroll down to the resumeView
       const nextSection = document.getElementById("resume");
       if (nextSection) {
         nextSection.scrollIntoView({ behavior: "smooth" });
       }
       onUrlChange(articleUrl);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error("Error:", error.message);
-      } else {
-        console.error("Unknown error occurred:", error);
-      }
+    } catch (error) {
+      console.error("Error:", error);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -69,7 +74,6 @@ function Home({ onSummaryChange, onUrlChange }: HomeProps) {
         <Button variant="contained" onClick={handleResumeNowClick}>
           RESUME NOW
         </Button>
-        {/* Backdrop is shown if loading is enabled*/}
         <Backdrop
           sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
           open={loading}

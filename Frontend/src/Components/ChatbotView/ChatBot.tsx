@@ -4,12 +4,14 @@ import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import TextField from "@mui/material/TextField";
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import "./chatbot.styles.css";
 
 function ChatBot({ articleUrl }: { articleUrl: string }) {
   const [userInput, setUserInput] = useState("");
-  const [chatHistory, setChatHistory] = useState<{ message: string; fromUser: boolean }[]>([]);
+  const [chatHistory, setChatHistory] = useState<
+    { message: string; fromUser: boolean }[]
+  >([]);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isBotTyping, setIsBotTyping] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
@@ -35,7 +37,10 @@ function ChatBot({ articleUrl }: { articleUrl: string }) {
       setIsBotTyping(false);
 
       const chatResponse = response.data.message;
-      setChatHistory(prevChatHistory => [...prevChatHistory, { message: chatResponse, fromUser: false }]);
+      setChatHistory((prevChatHistory) => [
+        ...prevChatHistory,
+        { message: chatResponse, fromUser: false },
+      ]);
     } catch (error) {
       console.error("Error al enviar mensaje al servidor:", error);
     }
@@ -55,7 +60,7 @@ function ChatBot({ articleUrl }: { articleUrl: string }) {
   }, [chatHistory]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       sendMessage();
     }
   };
@@ -63,17 +68,28 @@ function ChatBot({ articleUrl }: { articleUrl: string }) {
   return (
     <div className={`chat-container ${isChatOpen ? "open" : ""}`}>
       <div className="title-chat">
-      <p className={`title-container ${isChatOpen ? "open" : ""}`}>Shall we explore the article together?</p>
-      <div className="icon-container" onClick={toggleChat}>
-        <SmartToyOutlinedIcon fontSize="large" /> 
-      </div>
+        <p className={`title-container ${isChatOpen ? "open" : ""}`}>
+          Shall we explore the article together?
+        </p>
+        <div className="icon-container" onClick={toggleChat}>
+          <SmartToyOutlinedIcon fontSize="large" />
+        </div>
       </div>
       {isChatOpen && (
         <div className="chatbox">
           <div className="chat-history">
             {chatHistory.map((entry, index) => (
-              <div key={index} className={entry.fromUser ? "user-message" : "bot-message"}>
-                {entry.fromUser ? <UserIcon /> : isBotTyping ? <TypingIndicator /> : <BotIcon />}
+              <div
+                key={index}
+                className={entry.fromUser ? "user-message" : "bot-message"}
+              >
+                {entry.fromUser ? (
+                  <UserIcon />
+                ) : isBotTyping ? (
+                  <TypingIndicator />
+                ) : (
+                  <BotIcon />
+                )}
                 {entry.message}
               </div>
             ))}
@@ -86,12 +102,11 @@ function ChatBot({ articleUrl }: { articleUrl: string }) {
               type="text"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
-              placeholder="Chat here..."
+              placeholder="Start the chat here..."
               style={{ borderColor: "yellowgreen" }}
               onKeyDown={handleKeyDown}
             />
             <IconButton
-              aria-label="delete"
               onClick={sendMessage}
               color="primary"
               style={{ color: "yellowgreen" }}
@@ -113,7 +128,7 @@ const TypingIndicator = () => (
   </div>
 );
 
-const UserIcon = () => <PersonOutlineOutlinedIcon/>;
-const BotIcon = () => <SmartToyOutlinedIcon/>;
+const UserIcon = () => <PersonOutlineOutlinedIcon />;
+const BotIcon = () => <SmartToyOutlinedIcon />;
 
 export default ChatBot;

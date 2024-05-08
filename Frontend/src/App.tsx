@@ -22,7 +22,7 @@ function App() {
   return (
     <>
     <Header/>
-    <Home onSummaryChange={handleSummaryChange} onUrlChange={handleUrlChange} />
+    <Home onSummaryChange={handleSummaryChange} onUrlChange={handleUrlChange}  />
       <ResumeView summary={summary} />
     <ChatBot articleUrl={articleUrl} />
     </>

@@ -1,18 +1,52 @@
-.cover-resume{
-    display: inline-block;
-    height: calc(100vh - 80px);
-    width: 80%;
-    padding: 2%;
-    box-sizing: border-box;
-    background: none;
+.cover-resume {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.container-resume{
-    display: grid;
-    gap: 20px;
+.container-resume {
+  display: grid;
+  gap: 20px;
+  height: calc(100vh - 80px);
+  width: 100%;
+  padding: 2%;
+  box-sizing: border-box;
+  background: none;
 }
 
-.css-bhp9pd-MuiPaper-root-MuiCard-root{
-    border: solid 2px yellowgreen;
+.css-bhp9pd-MuiPaper-root-MuiCard-root {
+  border: solid 2px yellowgreen;
 }
 
+.panel {
+  width: 300px;
+  background-color: rgba(153, 205, 50, 0.363);
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 3%;
+}
+
+.item-list {
+  background-color: whitesmoke;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 5%;
+  text-align: justify;
+}
+
+.url-container {
+  display: flex;
+  align-items: center;
+}
+
+.url-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
