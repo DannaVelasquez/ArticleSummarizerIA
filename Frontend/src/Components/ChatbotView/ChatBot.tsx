@@ -29,10 +29,20 @@ function ChatBot({ articleUrl }: { articleUrl: string }) {
       setUserInput("");
       setIsBotTyping(true);
 
-      const response = await axios.post("http://localhost:3000/api/chat", {
-        message: userInput,
-        articleUrl: articleUrl,
-      });
+      let response;
+      if (articleUrl) {
+        response = await axios.post("http://localhost:3000/api/chat", {
+          message: userInput,
+          articleUrl: articleUrl,
+        });
+      } else {
+        response = {
+          data: {
+            message:
+              "Hi, please submit the article URL you want to chat about in the text box above",
+          },
+        };
+      }
 
       setIsBotTyping(false);
 
@@ -42,7 +52,7 @@ function ChatBot({ articleUrl }: { articleUrl: string }) {
         { message: chatResponse, fromUser: false },
       ]);
     } catch (error) {
-      console.error("Error al enviar mensaje al servidor:", error);
+      console.error("Error:", error);
     }
   };
 
@@ -53,12 +63,14 @@ function ChatBot({ articleUrl }: { articleUrl: string }) {
     }
   }, [chatHistory]);
 
+  //Scroll to last message in chat history
   useEffect(() => {
     if (chatEndRef.current) {
       chatEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [chatHistory]);
 
+  //Enter key enabled to click send button
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter") {
       sendMessage();
@@ -102,7 +114,7 @@ function ChatBot({ articleUrl }: { articleUrl: string }) {
               type="text"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
-              placeholder="Start the chat here..."
+              placeholder="Start chat here..."
               style={{ borderColor: "yellowgreen" }}
               onKeyDown={handleKeyDown}
             />

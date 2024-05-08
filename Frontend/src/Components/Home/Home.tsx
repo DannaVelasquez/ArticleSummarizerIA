@@ -14,7 +14,9 @@ interface HomeProps {
 function Home({ onSummaryChange, onUrlChange }: HomeProps) {
   const [articleUrl, setArticleUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [urls, setUrls] = useState<{ id: number; url: string }[]>(() => {
+  const [urls, setUrls] = useState<
+    { id: number; url: string; summary: string }[]
+  >(() => {
     const storedUrls = localStorage.getItem("urls");
     return storedUrls ? JSON.parse(storedUrls) : [];
   });
@@ -42,7 +44,10 @@ function Home({ onSummaryChange, onUrlChange }: HomeProps) {
       const data = await response.json();
       onSummaryChange(data.summary);
 
-      setUrls([...urls, { id: urls.length + 1, url: articleUrl }]);
+      setUrls([
+        ...urls,
+        { id: urls.length + 1, url: articleUrl, summary: data.summary },
+      ]);
 
       //After search, scroll down to the resumeView
       const nextSection = document.getElementById("resume");
@@ -58,7 +63,7 @@ function Home({ onSummaryChange, onUrlChange }: HomeProps) {
   };
 
   return (
-    <div className="cover">
+    <div id="home" className="cover">
       <div className="container">
         <h1 style={{ fontSize: "50px" }}>
           Welcome to Article Summarizer IA

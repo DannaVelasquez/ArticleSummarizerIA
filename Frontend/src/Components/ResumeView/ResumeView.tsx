@@ -7,11 +7,13 @@ import "./resume.styles.css";
 import IconButton from "@mui/material/IconButton";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import ArrowBackIosOutlinedIcon from "@mui/icons-material/ArrowBackIosOutlined";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"; // Importa el icono de delete
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 interface UrlItem {
   id: number;
   url: string;
+  summary: string;
 }
 
 interface ResumeViewProps {
@@ -21,7 +23,10 @@ interface ResumeViewProps {
 function ResumeView({ summary }: ResumeViewProps) {
   const [showPanel, setShowPanel] = useState(false);
   const [storedUrls, setStoredUrls] = useState<UrlItem[]>([]);
+  const [selectedSummary, setSelectedSummary] = useState<string>("");
+  const [hasData, setHasData] = useState<boolean>(false);
 
+  //Panel searched articles
   const togglePanel = () => {
     setShowPanel(!showPanel);
   };
@@ -33,6 +38,7 @@ function ResumeView({ summary }: ResumeViewProps) {
     if (storedUrlsJson) {
       const urls: UrlItem[] = JSON.parse(storedUrlsJson);
       setStoredUrls(urls);
+      setHasData(true); 
     }
   }, [storedUrls]);
 
@@ -41,6 +47,19 @@ function ResumeView({ summary }: ResumeViewProps) {
     setStoredUrls(updatedUrls);
     // Local storage update
     localStorage.setItem("urls", JSON.stringify(updatedUrls));
+
+    // Clear summary view when a selectedItem is deleted
+    if (selectedSummary && storedUrls.find((item) => item.id === id)) {
+      setSelectedSummary("");
+      setHasData(false);
+    }
+  };
+
+  const handleItemClick = (id: number) => {
+    const selectedItem = storedUrls.find((item) => item.id === id);
+    if (selectedItem) {
+      setSelectedSummary(selectedItem.summary);
+    }
   };
 
   return (
@@ -77,9 +96,23 @@ function ResumeView({ summary }: ResumeViewProps) {
         <h2>Searched Articles</h2>
         <ul className="list">
           {storedUrls.map((item) => (
-            <li className="item-list" key={item.id}>
+            <li
+              className="item-list"
+              key={item.id}
+            >
               <div className="url-container">
                 <span className="url-text">{item.url}</span>
+                <IconButton
+                  onClick={() => handleItemClick(item.id)}
+                  color="primary"
+                  style={{
+                    marginLeft: "10px",
+                    padding: "0",
+                    color: "yellowgreen",
+                  }}
+                >
+                  <VisibilityOutlinedIcon />
+                </IconButton>
                 <IconButton
                   onClick={() => handleDelete(item.id)}
                   color="primary"
@@ -116,7 +149,7 @@ function ResumeView({ summary }: ResumeViewProps) {
                 color="text.secondary"
                 style={{ textAlign: "justify" }}
               >
-                {summary}
+                {hasData ? (selectedSummary ? selectedSummary : summary ? summary : " ") : " "}
               </Typography>
             </CardContent>
           </Card>
@@ -127,3 +160,4 @@ function ResumeView({ summary }: ResumeViewProps) {
 }
 
 export default ResumeView;
+
