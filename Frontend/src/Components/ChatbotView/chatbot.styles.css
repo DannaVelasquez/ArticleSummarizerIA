@@ -3,7 +3,23 @@
   display: grid;
   bottom: 0;
   right: 0;
-  padding: 2%;
+  padding: 1%;
+}
+
+.title-chat{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  gap: 10px;
+}
+
+.title-container {
+  width: 150px;
+}
+
+.title-container.open {
+  width: auto;
 }
 
 .icon-container {
@@ -16,4 +32,51 @@
   border-radius: 80%;
   padding: 10;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.chatbox{
+  width: 500px;
+  background-color: white;
+  margin-top: 2%;
+  border-radius: 3%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.chat-history{
+  height: calc(100vh - 270px);
+  background-color: white;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 4%;
+  border-radius: 3%;
+}
+
+.input-chatbox{
+  display: flex;
+  flex-direction: row;
+  padding: 2%;
+}
+
+.css-1eed5fa-MuiInputBase-root-MuiInput-root::after{
+  border-bottom: 2px solid yellowgreen !important;
+}
+
+.user-message{
+  align-self: flex-end;
+  background-color: rgba(153, 205, 50, 0.363);
+  border-radius: 10px;
+  width: auto;
+  padding: 10px;
+  text-align: justify;
+}
+
+.bot-message{
+  align-self: flex-start;
+  background-color: lightgray;
+  border-radius: 10px;
+  width: auto;
+  padding: 10px;
+  text-align: justify;
 }

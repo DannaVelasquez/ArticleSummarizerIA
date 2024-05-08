@@ -63,7 +63,6 @@ function Home({ onSummaryChange, onUrlChange }: HomeProps) {
           id="outlined-basic"
           label="Submit your article URL here"
           variant="outlined"
-          style={{ fontWeight: "bold", color: "blue" }}
           value={articleUrl}
           onChange={(e) => setArticleUrl(e.target.value)}
         />

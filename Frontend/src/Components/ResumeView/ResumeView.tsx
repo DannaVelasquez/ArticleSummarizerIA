@@ -12,7 +12,7 @@ function ResumeView({ summary }: ResumeViewProps) {
     <div id='resume' className="cover-resume">
       <div className="container-resume">
       <h1>Your resume here 
-        <TaskAltOutlinedIcon fontSize='large' style={{marginLeft:'5px', marginBottom:'-5px', color:'greenyellow'}}/>
+        <TaskAltOutlinedIcon fontSize='large' style={{marginLeft:'5px', marginBottom:'-5px', color:'rgba(153, 205, 50, 063)'}}/>
       </h1>
       <Card>
       <CardContent>
