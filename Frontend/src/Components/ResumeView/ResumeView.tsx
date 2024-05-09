@@ -26,6 +26,8 @@ function ResumeView({ summary }: ResumeViewProps) {
   const [selectedSummary, setSelectedSummary] = useState<string>("");
   const [hasData, setHasData] = useState<boolean>(false);
 
+  console.log('stored', storedUrls)
+
   //Panel searched articles
   const togglePanel = () => {
     setShowPanel(!showPanel);
@@ -155,6 +157,7 @@ function ResumeView({ summary }: ResumeViewProps) {
           </Card>
         </div>
       </div>
+      
     </div>
   );
 }

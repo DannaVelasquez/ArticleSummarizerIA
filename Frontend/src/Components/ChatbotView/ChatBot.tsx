@@ -5,6 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import TextField from "@mui/material/TextField";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import CloseIcon from "@mui/icons-material/Close";
 import "./chatbot.styles.css";
 
 function ChatBot({ articleUrl }: { articleUrl: string }) {
@@ -15,9 +16,19 @@ function ChatBot({ articleUrl }: { articleUrl: string }) {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isBotTyping, setIsBotTyping] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const [chatIcon, setChatIcon] = useState(
+    <SmartToyOutlinedIcon fontSize="large" />
+  );
 
   const toggleChat = () => {
     setIsChatOpen(!isChatOpen);
+    setChatIcon(
+      isChatOpen ? (
+        <SmartToyOutlinedIcon fontSize="large" />
+      ) : (
+        <CloseIcon fontSize="large" />
+      )
+    );
   };
 
   const sendMessage = async () => {
@@ -84,7 +95,7 @@ function ChatBot({ articleUrl }: { articleUrl: string }) {
           Shall we explore the article together?
         </p>
         <div className="icon-container" onClick={toggleChat}>
-          <SmartToyOutlinedIcon fontSize="large" />
+          {chatIcon}
         </div>
       </div>
       {isChatOpen && (

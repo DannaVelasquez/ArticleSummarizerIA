@@ -42,3 +42,10 @@ button:focus,
 button:focus-visible {
   outline: none !important;
 }
+
+.swal2-confirm.custom-swal-button.swal2-styled,
+.swal2-confirm.swal2-styled {
+  background-color: yellowgreen; 
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+

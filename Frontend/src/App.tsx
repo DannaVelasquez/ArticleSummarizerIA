@@ -24,6 +24,7 @@ function App() {
     <Header/>
     <Home onSummaryChange={handleSummaryChange} onUrlChange={handleUrlChange}  />
       <ResumeView summary={summary} />
+      
     <ChatBot articleUrl={articleUrl} />
     </>
   )
